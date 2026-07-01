@@ -512,19 +512,71 @@
 
     /* ─── RESPONSIVE ─── */
     @media (max-width: 960px) {
-      nav { padding: 0 20px; }
-      .hero, .container, .contact-block, .approach-wrap { padding-left: 20px; padding-right: 20px; }
+      .nav-inner { padding: 0 20px; }
+      .hero, .container, .contact-block, .approach-wrap, .metrics-wrap { padding-left: 24px; padding-right: 24px; }
       .hero h1 { letter-spacing: -2px; }
       .prow { flex-direction: column; }
-      .prow-1 .pcard, .prow-2 .pcard { flex: unset; height: 360px; width: 100%; }
+      .prow-1 .pcard, .prow-2 .pcard { flex: unset; height: auto; min-height: 300px; width: 100%; }
+      .pcard-img-wrap { height: 200px; }
       .contact-inner { padding: 56px 32px; }
+      .metrics-grid { grid-template-columns: 1fr 1fr; }
+      .skills-grid { grid-template-columns: 1fr 1fr; }
+      .contact-inner-wrap { flex-direction: column; gap: 40px; padding: 40px 32px; }
+      .contact-row { gap: 24px; }
+      footer { padding-left: 24px; padding-right: 24px; }
     }
     @media (max-width: 600px) {
+      .nav-inner { padding: 0 16px; }
+      .hero, .container, .contact-block, .metrics-wrap { padding-left: 16px; padding-right: 16px; }
+      .hero { padding-top: 60px; padding-bottom: 48px; }
+      .hero h1 { letter-spacing: -1.5px; }
       .approach-grid { grid-template-columns: 1fr; }
       .hero-actions { flex-direction: column; align-items: flex-start; }
       .nav-right .hide-sm { display: none; }
-      footer { flex-direction: column; gap: 16px; text-align: center; }
+      footer { flex-direction: column; gap: 16px; text-align: center; padding-left: 16px; padding-right: 16px; }
+      .metrics-grid { grid-template-columns: 1fr; }
+      .metric-num { font-size: 40px; }
+      .skills-grid { grid-template-columns: 1fr; }
+      .prow-1 .pcard, .prow-2 .pcard { min-height: 260px; }
+      .pcard-img-wrap { height: 160px; }
+      .contact-inner-wrap { padding: 32px 20px; gap: 28px; }
+      .made-with-inner { flex-direction: column; gap: 24px; padding: 0 16px; }
     }
+
+    /* ─── HAMBURGER MENU ─── */
+    .hamburger {
+      display: none; flex-direction: column; justify-content: center; gap: 5px;
+      width: 36px; height: 36px; background: none; border: none; cursor: pointer;
+      padding: 4px; border-radius: var(--r-sm);
+    }
+    .hamburger span {
+      display: block; height: 2px; background: var(--text);
+      border-radius: 2px; transition: all 0.25s ease;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    .mobile-menu {
+      display: none; position: fixed; inset: 60px 0 0 0; z-index: 199;
+      background: rgba(249,249,247,0.97); backdrop-filter: blur(16px);
+      flex-direction: column; padding: 32px 24px; gap: 8px;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      font-size: 20px; font-weight: 600; color: var(--text); text-decoration: none;
+      padding: 14px 0; border-bottom: 1px solid var(--border);
+      transition: color 0.18s;
+    }
+    .mobile-menu a:last-child { border-bottom: none; }
+    .mobile-menu a:hover { color:#6161A2; }
+    .mobile-menu .mob-cta {
+      margin-top: 16px; background: #6161A2; color: #fff;
+      text-align: center; padding: 16px; border-radius: var(--r-pill);
+      font-size: 16px; border-bottom: none;
+    }
+    .mobile-menu .mob-cta:hover { background:#4E4E84; color: #fff; }
+    @media (max-width: 600px) { .hamburger { display: flex; } }
   </style>
 </head>
 <body>
@@ -532,15 +584,34 @@
 <!-- ═══ NAV ═══════════════════════════════════════ -->
 <nav id="main-nav">
   <div class="nav-inner">
-  <a class="nav-logo" href="#">Anisha<em>.</em></a>
-  <ul class="nav-right">
-    <li><a href="#work" class="hide-sm">Work</a></li>
-    <li><a href="about.html" class="hide-sm">About</a></li>
-
-    <li><a href="anisha.pdf" target="_blank" class="cta">Resume</a></li>
-  </ul>
+    <a class="nav-logo" href="#">Anisha<em>.</em></a>
+    <ul class="nav-right">
+      <li><a href="#work" class="hide-sm">Work</a></li>
+      <li><a href="about.html" class="hide-sm">About</a></li>
+      <li><a href="anisha.pdf" target="_blank" class="cta hide-sm">Resume</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </nav>
+<div class="mobile-menu" id="mobile-menu">
+  <a href="#work" onclick="closeMobileMenu()">Work</a>
+  <a href="about.html">About</a>
+  <a href="anisha.pdf" target="_blank" class="mob-cta">Resume</a>
+</div>
+<script>
+  const btn = document.getElementById('hamburger');
+  const menu = document.getElementById('mobile-menu');
+  btn.addEventListener('click', () => {
+    btn.classList.toggle('open');
+    menu.classList.toggle('open');
+  });
+  function closeMobileMenu() {
+    btn.classList.remove('open');
+    menu.classList.remove('open');
+  }
+</script>
 
 <!-- ═══ HERO ══════════════════════════════════════ -->
 <div class="hero">
@@ -719,7 +790,7 @@
   <div class="contact-list" data-fade data-d="1">
 
     <!-- Email -->
-    <a href="mailto:abhegade11@gmail.com" class="contact-row">
+    <a href="mailto:anishaa.bhegade@gmail.com" class="contact-row">
       <div class="contact-row-left">
         <div class="contact-icon">
           <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><rect x="1.5" y="3.5" width="15" height="11" rx="2" stroke="currentColor" stroke-width="1.4"/><path d="M1.5 6l7.5 5 7.5-5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
@@ -727,7 +798,7 @@
         <span class="contact-label">Email</span>
       </div>
       <div class="contact-row-right">
-        abhegade11@gmail.com
+        anishaa.bhegade@gmail.com
         <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M1.5 11.5l10-10M11.5 1.5H5.5M11.5 1.5v6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </div>
     </a>
