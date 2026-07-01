@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Student Housing — Anisha Bhegade</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
+    :root {
+      --bg:#F9F9F7; --white:#FFFFFF; --surface:#F3F1EF; --surface-2:#EBE8E5;
+      --text:#111111; --text-2:#555555; --text-3:#999999;
+      --accent:#6161A2; --accent-dk:#4E4E84;
+      --accent-light:#EDEDF6; --accent-mid:#A4A4CC;
+      --border:#E2E2DE;
+      --r-sm:8px; --r-md:14px; --r-lg:20px; --r-xl:28px; --r-pill:999px;
+    }
+    html { scroll-behavior:smooth; }
+    body { font-family:'Inter',sans-serif; background:var(--bg); color:var(--text); line-height:1.6; -webkit-font-smoothing:antialiased; }
+
+    nav { position:sticky; top:0; z-index:200; height:60px; background:rgba(249,249,247,0.92); backdrop-filter:blur(14px); border-bottom:1px solid var(--border); }
+    .nav-inner { max-width:1160px; margin:0 auto; padding:0 40px; height:100%; display:flex; align-items:center; justify-content:space-between; }
+    .nav-back { display:flex; align-items:center; gap:8px; text-decoration:none; font-size:13.5px; font-weight:500; color:var(--text-2); transition:color .18s; }
+    .nav-back:hover { color:var(--text); }
+    .nav-logo { font-family:'Bricolage Grotesque',sans-serif; font-weight:800; font-size:18px; letter-spacing:-.5px; color:var(--text); text-decoration:none; }
+    .nav-logo em { font-style:normal; color:var(--accent); }
+
+    .cs-hero { max-width:1160px; margin:0 auto; padding:80px 40px 64px; }
+    .cs-tag { display:inline-flex; align-items:center; gap:6px; background:var(--accent-light); border:1px solid var(--accent-mid); border-radius:var(--r-pill); padding:4px 14px; font-size:11px; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:var(--accent); margin-bottom:24px; }
+    .cs-hero h1 { font-family:'Bricolage Grotesque',sans-serif; font-size:clamp(36px,5vw,68px); font-weight:800; letter-spacing:-2.5px; line-height:1.05; margin-bottom:20px; }
+    .cs-hero-sub { font-size:17px; color:var(--text-2); line-height:1.7; max-width:640px; margin-bottom:48px; }
+    .cs-meta { display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--border); border:1px solid var(--border); border-radius:var(--r-lg); overflow:hidden; }
+    .cs-meta-item { background:var(--white); padding:20px 24px; }
+    .cs-meta-label { font-size:10.5px; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:var(--text-3); margin-bottom:6px; }
+    .cs-meta-value { font-size:14.5px; font-weight:600; color:var(--text); line-height:1.4; }
+
+    .cs-cover { max-width:1160px; margin:0 auto; padding:0 40px 72px; }
+    .cs-cover img { width:100%; border-radius:var(--r-xl); display:block; border:1px solid var(--border); }
+
+    .cs-body { max-width:800px; margin:0 auto; padding:0 40px 96px; }
+    .cs-section { margin-bottom:72px; }
+    .cs-section:last-child { margin-bottom:0; }
+
+    .eyebrow { font-size:11px; font-weight:700; letter-spacing:1.8px; text-transform:uppercase; color:var(--accent); margin-bottom:12px; display:block; }
+    .cs-h2 { font-family:'Bricolage Grotesque',sans-serif; font-size:clamp(24px,3vw,36px); font-weight:800; letter-spacing:-1px; line-height:1.1; margin-bottom:20px; }
+    .cs-p { font-size:15.5px; color:var(--text-2); line-height:1.78; margin-bottom:16px; }
+    .cs-p strong { color:var(--text); font-weight:600; }
+    .cs-p:last-child { margin-bottom:0; }
+
+    .callout { background:var(--accent-light); border-left:3px solid var(--accent); border-radius:0 var(--r-md) var(--r-md) 0; padding:20px 24px; margin:28px 0; }
+    .callout p { font-size:15px; color:var(--text); line-height:1.65; font-weight:500; }
+
+    /* STATS */
+    .stats-row { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-top:20px; }
+    .stat-card { background:var(--white); border:1px solid var(--border); border-radius:var(--r-lg); padding:22px; }
+    .stat-num { font-family:'Bricolage Grotesque',sans-serif; font-size:40px; font-weight:800; letter-spacing:-1.5px; color:var(--text); line-height:1; margin-bottom:8px; }
+    .stat-num b { color:var(--accent); font-weight:inherit; }
+    .stat-label { font-size:13px; color:var(--text-2); line-height:1.5; }
+
+    /* RESEARCH FINDINGS */
+    .findings-list { display:flex; flex-direction:column; gap:8px; margin-top:20px; }
+    .finding-item { display:flex; align-items:flex-start; gap:14px; background:var(--white); border:1px solid var(--border); border-radius:var(--r-md); padding:16px 20px; }
+    .finding-pct { font-family:'Bricolage Grotesque',sans-serif; font-size:28px; font-weight:800; letter-spacing:-1px; color:var(--accent); line-height:1; flex-shrink:0; width:68px; }
+    .finding-text { font-size:14px; color:var(--text-2); line-height:1.6; padding-top:4px; }
+    .finding-text strong { color:var(--text); }
+
+    /* PERSONAS */
+    .persona-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:20px; }
+    .persona-card { background:var(--white); border:1px solid var(--border); border-radius:var(--r-xl); overflow:hidden; }
+    .persona-img { width:100%; height:200px; object-fit:cover; object-position:top; display:block; }
+    .persona-body { padding:22px; }
+    .persona-name { font-family:'Bricolage Grotesque',sans-serif; font-size:20px; font-weight:800; letter-spacing:-.3px; margin-bottom:2px; }
+    .persona-role { font-size:12px; color:var(--text-3); margin-bottom:14px; }
+    .persona-label { font-size:10.5px; font-weight:700; letter-spacing:.8px; text-transform:uppercase; color:var(--text-3); margin-bottom:6px; }
+    .persona-quote { font-size:13px; color:var(--text-2); font-style:italic; line-height:1.6; margin-bottom:14px; }
+    .pain-list { display:flex; flex-direction:column; gap:6px; }
+    .pain-item { display:flex; gap:8px; font-size:13px; color:var(--text-2); line-height:1.5; }
+    .pain-item::before { content:'—'; color:var(--accent); flex-shrink:0; }
+
+    /* FEATURES */
+    .features-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:20px; }
+    .feature-card { background:var(--white); border:1px solid var(--border); border-radius:var(--r-lg); padding:22px; }
+    .feature-icon { font-size:22px; margin-bottom:10px; }
+    .feature-title { font-size:14px; font-weight:700; color:var(--text); margin-bottom:6px; }
+    .feature-desc { font-size:13px; color:var(--text-2); line-height:1.6; }
+
+    /* SCREENS */
+    .screens-grid { display:grid; grid-template-columns:1fr 1fr; column-gap:20px; row-gap:48px; margin-top:20px; }
+    .screen-item { display:flex; flex-direction:column; gap:10px; }
+    .screen-label { font-size:13px; font-weight:600; color:var(--text-2); }
+    .screen-item img { width:100%; display:block; border-radius:var(--r-lg); }
+
+    /* WIREFRAMES */
+    .wf-img { width:100%; border-radius:var(--r-lg); border:1px solid var(--border); display:block; margin-top:20px; }
+
+    /* IMPACT */
+    .impact-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-top:20px; }
+    .impact-card { background:var(--accent-light); border:1px solid var(--accent-mid); border-radius:var(--r-lg); padding:24px; text-align:center; }
+    .impact-num { font-family:'Bricolage Grotesque',sans-serif; font-size:40px; font-weight:800; letter-spacing:-1.5px; color:var(--accent); line-height:1; margin-bottom:8px; }
+    .impact-label { font-size:13px; color:var(--text-2); line-height:1.5; }
+
+    /* NEXT / BACK */
+    .next-project { border-top:1px solid var(--border); padding-top:48px; margin-top:48px; display:flex; justify-content:space-between; align-items:center; gap:24px; flex-wrap:wrap; }
+    .next-label { font-size:11px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:var(--text-3); margin-bottom:8px; }
+    .next-title { font-family:'Bricolage Grotesque',sans-serif; font-size:24px; font-weight:800; letter-spacing:-.5px; color:var(--text); }
+    .next-link { display:inline-flex; align-items:center; gap:8px; background:var(--text); color:#fff; padding:13px 24px; border-radius:var(--r-pill); font-size:14px; font-weight:500; text-decoration:none; transition:all .2s; white-space:nowrap; }
+    .next-link:hover { background:var(--accent); transform:translateY(-1px); }
+
+    footer { max-width:1160px; margin:0 auto; padding:28px 40px 36px; display:flex; justify-content:space-between; align-items:center; border-top:1px solid var(--border); }
+    footer span { font-size:12.5px; color:var(--text-3); }
+    .footer-links { display:flex; gap:22px; }
+    .footer-links a { font-size:12.5px; color:var(--text-3); text-decoration:none; transition:color .18s; }
+    .footer-links a:hover { color:var(--accent); }
+
+    [data-fade] { opacity:0; transform:translateY(18px); transition:opacity .6s ease,transform .6s ease; }
+    [data-fade].in { opacity:1; transform:none; }
+    [data-fade][data-d="1"] { transition-delay:.08s; }
+    [data-fade][data-d="2"] { transition-delay:.16s; }
+
+    @media(max-width:768px) {
+      nav,footer,.cs-hero,.cs-cover,.cs-body { padding-left:20px; padding-right:20px; }
+      .cs-meta,.stats-row,.persona-grid,.features-grid,.screens-grid,.impact-grid { grid-template-columns:1fr; }
+    }
+
+    /* ─── CONTACT ─── */
+    .contact-block { max-width: 1160px; margin: 0 auto; padding: 0 40px 100px; }
+    .contact-inner-wrap {
+      display: flex; align-items: center; gap: 80px;
+      border: 1px solid var(--border); border-radius: 28px;
+      padding: 56px 64px;
+    }
+    .contact-heading {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: clamp(32px, 3.8vw, 52px); font-weight: 800;
+      letter-spacing: -1.5px; line-height: 1.1; color: var(--text);
+      flex: 1; min-width: 260px;
+    }
+    .contact-right { flex: 1; }
+    .contact-list { display: flex; flex-direction: column; }
+    .contact-row {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 18px 20px; border-radius: 10px;
+      text-decoration: none; color: inherit;
+      transition: background 0.18s;
+    }
+    .contact-row:hover { background: var(--surface); }
+    .contact-row-left { display: flex; align-items: center; gap: 14px; }
+    .contact-icon {
+      width: 32px; height: 32px; display: flex; align-items: center; justify-content: center;
+      color: var(--text-2);
+    }
+    .contact-label { font-size: 14px; font-weight: 500; color: var(--text); }
+    .contact-row-right { display: flex; align-items: center; gap: 8px; color: var(--text-3); font-size: 13px; }
+    .contact-row-right svg { color: var(--text-3); }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+  <a href="index.html" class="nav-back">
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M10 3L5 8l5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    All work
+  </a>
+  <a href="index.html" class="nav-logo">Anisha<em>.</em></a>
+  </div>
+</nav>
+
+<div class="cs-hero">
+  <div class="cs-tag">Mobile App · Safety · UX Research</div>
+  <h1 data-fade>Student Housing —<br>Safety First</h1>
+  <p class="cs-hero-sub" data-fade data-d="1">
+    Designing a housing discovery platform for international students that puts safety, community trust, and verified information at the center of every decision.
+  </p>
+  <div class="cs-meta" data-fade data-d="2">
+    <div class="cs-meta-item">
+      <div class="cs-meta-label">My Role</div>
+      <div class="cs-meta-value">UX Designer &amp; Researcher</div>
+    </div>
+    <div class="cs-meta-item">
+      <div class="cs-meta-label">Timeline</div>
+      <div class="cs-meta-value">Jan – Apr 2025</div>
+    </div>
+    <div class="cs-meta-item">
+      <div class="cs-meta-label">Platform</div>
+      <div class="cs-meta-value">iOS Mobile App</div>
+    </div>
+    <div class="cs-meta-item">
+      <div class="cs-meta-label">Focus</div>
+      <div class="cs-meta-value">Safety &amp; Inclusivity</div>
+    </div>
+  </div>
+</div>
+
+<div class="cs-cover">
+  <img src="housing-hero-image.png" alt="Student Housing app — verified map search view" />
+</div>
+
+<div class="cs-body">
+
+  <!-- OVERVIEW -->
+  <div class="cs-section" data-fade>
+    <span class="eyebrow">The Problem</span>
+    <h2 class="cs-h2">International students navigate housing blind</h2>
+    <p class="cs-p">Every year, thousands of international students arrive in new cities with little local knowledge, limited personal networks, and no reliable way to verify the safety of a neighborhood or landlord. They rely on word-of-mouth, biased reviews, and platforms built for general audiences — not for their specific vulnerabilities.</p>
+    <p class="cs-p">The consequences go beyond inconvenience. The gap between needing housing and finding housing that is <strong>safe, inclusive, and trustworthy</strong> is a genuine wellbeing crisis.</p>
+    <div class="stats-row">
+      <div class="stat-card">
+        <div class="stat-num"><b>9,400</b><span style="font-size:22px;">+</span></div>
+        <div class="stat-label">Sex offenses on U.S. campuses annually</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num"><b>6,800</b><span style="font-size:22px;">+</span></div>
+        <div class="stat-label">Campus burglaries reported each year</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num"><b>1 in 4</b></div>
+        <div class="stat-label">International students experience discrimination in housing searches</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RESEARCH -->
+  <div class="cs-section" data-fade>
+    <span class="eyebrow">User Research</span>
+    <h2 class="cs-h2">Safety isn't a feature — it's the foundation</h2>
+    <p class="cs-p">Research was conducted through interviews and surveys with international students currently enrolled in U.S. universities. The findings revealed that housing search is not just a logistical challenge — it's an emotionally charged process driven by fear of the unknown.</p>
+    <div class="findings-list">
+      <div class="finding-item">
+        <div class="finding-pct">100%</div>
+        <div class="finding-text"><strong>of participants prioritized safety</strong> as their top concern when searching for housing — above price, commute, or amenities.</div>
+      </div>
+      <div class="finding-item">
+        <div class="finding-pct">75%</div>
+        <div class="finding-text"><strong>relied on personal networks</strong> — friends from home or current students — as their primary source of housing leads, because they couldn't trust platforms alone.</div>
+      </div>
+      <div class="finding-item">
+        <div class="finding-pct">50%</div>
+        <div class="finding-text"><strong>found the process "extremely challenging"</strong> and described feeling overwhelmed, unprepared, or unsafe during their housing search.</div>
+      </div>
+    </div>
+    <div class="callout">
+      <p><strong>Key insight:</strong> Students don't just want more listings. They want a way to trust what they're seeing — verified information, reviews from people like them, and clarity about what a neighborhood is actually like before committing.</p>
+    </div>
+  </div>
+
+  <!-- PERSONAS -->
+  <div class="cs-section" data-fade>
+    <span class="eyebrow">User Personas</span>
+    <h2 class="cs-h2">Different fears, one shared need for safety</h2>
+    <div class="persona-grid">
+      <div class="persona-card">
+        <img src="https://framerusercontent.com/images/eH2dQd3hSddK9YD3TJHLlft9GX8.png" alt="Amit Kumar persona" class="persona-img" loading="lazy" />
+        <div class="persona-body">
+          <div class="persona-name">Amit Kumar</div>
+          <div class="persona-role">25 · Graduate Student · Newly arrived from India</div>
+          <div class="persona-label">Goal</div>
+          <p class="persona-quote">"I just need to know I'll be safe and not scammed. I don't have anyone here to help me yet."</p>
+          <div class="persona-label">Key Frustrations</div>
+          <div class="pain-list">
+            <div class="pain-item">Listings are unverified and hard to trust remotely</div>
+            <div class="pain-item">Can't evaluate neighborhoods without local context</div>
+            <div class="pain-item">Landlord communication drops off after initial inquiry</div>
+          </div>
+        </div>
+      </div>
+      <div class="persona-card">
+        <img src="https://framerusercontent.com/images/1YYrfZdnEnoVc3qQNpokOt619kE.png" alt="Ruth persona" class="persona-img" loading="lazy" />
+        <div class="persona-body">
+          <div class="persona-name">Ruth Okonkwo</div>
+          <div class="persona-role">24 · Graduate Student · LGBTQ+ student from Nigeria</div>
+          <div class="persona-label">Goal</div>
+          <p class="persona-quote">"I need somewhere I can be myself without fear — safety means something different to me than just crime statistics."</p>
+          <div class="persona-label">Key Frustrations</div>
+          <div class="pain-list">
+            <div class="pain-item">Generic platforms don't surface LGBTQ+-friendly housing</div>
+            <div class="pain-item">No way to find reviews from people with similar identities</div>
+            <div class="pain-item">Sharing personal needs with landlords feels risky</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FEATURES -->
+  <div class="cs-section" data-fade>
+    <span class="eyebrow">Design Solution</span>
+    <h2 class="cs-h2">Four features built around what students actually need</h2>
+    <p class="cs-p">Each feature maps directly back to a research finding — no design for design's sake. The goal was to reduce anxiety at every step of the housing search, from discovery through move-in.</p>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">🗺️</div>
+        <div class="feature-title">Verified Map Search</div>
+        <div class="feature-desc">Browse listings on a safety-aware map with neighborhood data, crime overlays, and proximity to campus — all in one view.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">⭐</div>
+        <div class="feature-title">Student-Only Reviews</div>
+        <div class="feature-desc">Reviews written by verified students — not anonymous web users. Filter by identity or student background for more relevant signal.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🔍</div>
+        <div class="feature-title">Advanced Filters</div>
+        <div class="feature-desc">Filter by budget, proximity, pet policy, LGBTQ+-friendly status, accessibility features, and more — the details that matter most get surfaced, not buried.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">💬</div>
+        <div class="feature-title">University Community Inbox</div>
+        <div class="feature-desc">A dedicated inbox connecting students with verified university housing offices and landlords — keeping official communication in one trusted place.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROCESS -->
+  <div class="cs-section" data-fade>
+    <span class="eyebrow">Design Process</span>
+    <h2 class="cs-h2">From lo-fi to hi-fi — clarity at every stage</h2>
+    <p class="cs-p">The design process followed a standard but rigorous path: IA → paper sketches → lo-fi wireframes → usability testing → hi-fi screens. The lo-fi wireframes were particularly valuable for testing the map interaction and filter flow before committing to visual design.</p>
+    <img src="https://framerusercontent.com/images/GCwymzuB4DsONTzyLVZLmbQnKJ8.png" alt="Lo-fi wireframes — student housing app" class="wf-img" loading="lazy" />
+  </div>
+
+  <!-- FINAL SCREENS -->
+  <div class="cs-section" data-fade>
+    <span class="eyebrow">Final Screens</span>
+    <h2 class="cs-h2">A platform that feels like it was built for them</h2>
+    <div class="screens-grid">
+      <div class="screen-item">
+        <div class="screen-label">Map Search</div>
+        <img src="https://framerusercontent.com/images/ToZh8WcNwS27ofnqJ2uDk3ymo.png" alt="Map view" loading="lazy" />
+      </div>
+      <div class="screen-item">
+        <div class="screen-label">Student Reviews</div>
+        <img src="https://framerusercontent.com/images/y29Wa7j215oECR6boXzSB9bqm3Q.png" alt="Reviews screen" loading="lazy" />
+      </div>
+      <div class="screen-item">
+        <div class="screen-label">Advanced Filters</div>
+        <img src="https://framerusercontent.com/images/M3gwX41AM0Rkz4IYUUiDq6Spm0.png" alt="Filter screen" loading="lazy" />
+      </div>
+      <div class="screen-item">
+        <div class="screen-label">Community Inbox</div>
+        <img src="https://framerusercontent.com/images/lKRcBXMWg1Wl3RD1ZyiQiEx8.png" alt="Community inbox" loading="lazy" />
+      </div>
+    </div>
+  </div>
+
+  <!-- IMPACT -->
+  <div class="cs-section" data-fade>
+    <span class="eyebrow">Impact</span>
+    <h2 class="cs-h2">Validated — and ready for more</h2>
+    <p class="cs-p">Usability testing with students from the target demographic confirmed that the design reduced decision anxiety and increased confidence in the housing search process.</p>
+    <div class="impact-grid">
+      <div class="impact-card">
+        <div class="impact-num">5 min</div>
+        <div class="impact-label">Average time to find a shortlisted listing — from search to save</div>
+      </div>
+      <div class="impact-card">
+        <div class="impact-num">100%</div>
+        <div class="impact-label">Of test participants valued safety ratings as a must-have feature</div>
+      </div>
+      <div class="impact-card">
+        <div class="impact-num">4.8 / 5</div>
+        <div class="impact-label">Average trust score for verified student reviews vs. generic platforms</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- REFLECTION -->
+  <div class="cs-section" data-fade>
+    <span class="eyebrow">Reflection</span>
+    <h2 class="cs-h2">Designing with, not for</h2>
+    <p class="cs-p">This project reinforced something I carry into every engagement: <strong>the more marginalized or vulnerable the user, the higher the stakes for getting design right.</strong> International students aren't a niche audience — they're a population navigating one of the most uncertain transitions of their lives.</p>
+    <p class="cs-p">The most important design decision wasn't a feature — it was the decision to center safety and identity explicitly, rather than treating them as edge cases. That choice shaped everything else: the filters, the review system, the community inbox. Good research makes those choices obvious.</p>
+  </div>
+
+  <!-- BACK TO PORTFOLIO -->
+  <div class="next-project" data-fade>
+    <div>
+      <div class="next-label">Back to the beginning</div>
+      <div class="next-title">See all case studies</div>
+    </div>
+    <a href="index.html" class="next-link">
+      Back to portfolio
+      <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M2.5 7.5h10M7.5 2.5l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+  </div>
+
+</div>
+
+
+
+<!-- ═══ CONTACT ════════════════════════════════════ -->
+<div class="contact-block" id="contact">
+  <div class="contact-inner-wrap">
+    <h2 class="contact-heading" data-fade>Let's build something meaningful together.</h2>
+    <div class="contact-right">
+  <div class="contact-list" data-fade data-d="1">
+
+    <!-- Email -->
+    <a href="mailto:abhegade11@gmail.com" class="contact-row">
+      <div class="contact-row-left">
+        <div class="contact-icon">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><rect x="1.5" y="3.5" width="15" height="11" rx="2" stroke="currentColor" stroke-width="1.4"/><path d="M1.5 6l7.5 5 7.5-5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+        </div>
+        <span class="contact-label">Email</span>
+      </div>
+      <div class="contact-row-right">
+        abhegade11@gmail.com
+        <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M1.5 11.5l10-10M11.5 1.5H5.5M11.5 1.5v6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+    </a>
+
+    <!-- LinkedIn -->
+    <a href="https://www.linkedin.com/in/anisha-bhegade" target="_blank" rel="noopener" class="contact-row">
+      <div class="contact-row-left">
+        <div class="contact-icon">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><rect x="1.5" y="1.5" width="15" height="15" rx="3" stroke="currentColor" stroke-width="1.4"/><path d="M5 7.5V13M5 5v.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><path d="M8.5 13v-3a2 2 0 014 0v3M8.5 7.5V13" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <span class="contact-label">LinkedIn</span>
+      </div>
+      <div class="contact-row-right">
+        /in/anisha-bhegade
+        <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M1.5 11.5l10-10M11.5 1.5H5.5M11.5 1.5v6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+    </a>
+
+    <!-- Behance -->
+    <a href="https://www.behance.net/anishabhegade" target="_blank" rel="noopener" class="contact-row">
+      <div class="contact-row-left">
+        <div class="contact-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M2 7h7c2 0 3.5 1 3.5 3S10 13 8 13H2V7zm0 6h7.5c2.5 0 4 1.2 4 3.2S11.5 19 9 19H2v-6z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M14 10h8M16 7h4M14.5 15.5c0-2.5 2-4 4-4 2.2 0 4 1.5 4 4H14.5zm0 0c0 2 1.5 3.5 4 3.5 1.5 0 2.5-.5 3-1.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <span class="contact-label">Behance</span>
+      </div>
+      <div class="contact-row-right">
+        /anishabhegade
+        <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M1.5 11.5l10-10M11.5 1.5H5.5M11.5 1.5v6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+    </a>
+
+    </div>
+    </div><!-- .contact-right -->
+  </div><!-- .contact-inner-wrap -->
+</div>
+
+<script>
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('in'); obs.unobserve(e.target); } });
+  }, { threshold:0.1, rootMargin:'0px 0px -32px 0px' });
+  document.querySelectorAll('[data-fade]').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>

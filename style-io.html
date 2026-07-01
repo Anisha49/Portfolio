@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Style IO — Anisha Bhegade</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
+    :root {
+      --bg:#F9F9F7; --white:#FFFFFF; --surface:#F3F1EF; --surface-2:#EBE8E5;
+      --text:#111111; --text-2:#555555; --text-3:#999999;
+      --accent:#DE1C59; --accent-dk:#B8164A;
+      --accent-light:#FDEDF3; --accent-mid:#F4A0BF;
+      --border:#E2E2DE;
+      --r-sm:8px; --r-md:14px; --r-lg:20px; --r-xl:28px; --r-pill:999px;
+    }
+    html { scroll-behavior:smooth; }
+    body { font-family:'Inter',sans-serif; background:var(--bg); color:var(--text); line-height:1.6; -webkit-font-smoothing:antialiased; }
+
+    nav {
+      position:sticky; top:0; z-index:200; height:60px; background:rgba(249,249,247,0.92); backdrop-filter:blur(14px);
+      border-bottom:1px solid var(--border);
+    }
+    .nav-inner { max-width:1160px; margin:0 auto; padding:0 40px; height:100%; display:flex; align-items:center; justify-content:space-between; }
+    .nav-back { display:flex; align-items:center; gap:8px; text-decoration:none; font-size:13.5px; font-weight:500; color:var(--text-2); transition:color .18s; }
+    .nav-back:hover { color:var(--text); }
+    .nav-logo { font-family:'Bricolage Grotesque',sans-serif; font-weight:800; font-size:18px; letter-spacing:-.5px; color:var(--text); text-decoration:none; }
+    .nav-logo em { font-style:normal; color:var(--accent); }
+
+    .cs-hero { max-width:1160px; margin:0 auto; padding:80px 40px 64px; }
+    .cs-tag {
+      display:inline-flex; align-items:center; gap:6px;
+      background:var(--accent-light); border:1px solid var(--accent-mid);
+      border-radius:var(--r-pill); padding:4px 14px;
+      font-size:11px; font-weight:700; letter-spacing:1px; text-transform:uppercase;
+      color:var(--accent); margin-bottom:24px;
+    }
+    .cs-hero h1 {
+      font-family:'Bricolage Grotesque',sans-serif;
+      font-size:clamp(36px,5vw,68px); font-weight:800;
+      letter-spacing:-2.5px; line-height:1.05; margin-bottom:20px;
+    }
+    .cs-hero-sub { font-size:17px; color:var(--text-2); line-height:1.7; max-width:620px; margin-bottom:48px; }
+    .cs-meta {
+      display:grid; grid-template-columns:repeat(4,1fr); gap:1px;
+      background:var(--border); border:1px solid var(--border);
+      border-radius:var(--r-lg); overflow:hidden;
+    }
+    .cs-meta-item { background:var(--white); padding:20px 24px; }
+    .cs-meta-label { font-size:10.5px; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:var(--text-3); margin-bottom:6px; }
+    .cs-meta-value { font-size:14.5px; font-weight:600; color:var(--text); line-height:1.4; }
+
+    .cs-cover { max-width:1160px; margin:0 auto; padding:0 40px 72px; }
+    .cs-cover img { width:100%; border-radius:var(--r-xl); display:block; border:1px solid var(--border); }
+
+    .cs-body { max-width:800px; margin:0 auto; padding:0 40px 96px; }
+    .cs-section { margin-bottom:72px; }
+    .cs-section:last-child { margin-bottom:0; }
+
+    .eyebrow { font-size:11px; font-weight:700; letter-spacing:1.8px; text-transform:uppercase; color:var(--accent); margin-bottom:12px; display:block; }
+    .cs-h2 { font-family:'Bricolage Grotesque',sans-serif; font-size:clamp(24px,3vw,36px); font-weight:800; letter-spacing:-1px; line-height:1.1; margin-bottom:20px; }
+    .cs-p { font-size:15.5px; color:var(--text-2); line-height:1.78; margin-bottom:16px; }
+    .cs-p strong { color:var(--text); font-weight:600; }
+    .cs-p:last-child { margin-bottom:0; }
+
+    .callout {
+      background:var(--accent-light); border-left:3px solid var(--accent);
+      border-radius:0 var(--r-md) var(--r-md) 0; padding:20px 24px; margin:28px 0;
+    }
+    .callout p { font-size:15px; color:var(--text); line-height:1.65; font-weight:500; }
+
+    /* CHALLENGE GRID */
+    .challenge-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:20px; }
+    .challenge-card {
+      background:var(--white); border:1px solid var(--border);
+      border-radius:var(--r-lg); padding:22px;
+    }
+    .challenge-icon { font-size:22px; margin-bottom:12px; }
+    .challenge-title { font-size:14px; font-weight:700; color:var(--text); margin-bottom:6px; }
+    .challenge-desc { font-size:13px; color:var(--text-2); line-height:1.55; }
+
+    /* SOLUTION FEATURES */
+    .features-list { display:flex; flex-direction:column; gap:10px; margin-top:20px; }
+    .feature-item {
+      display:flex; gap:16px; align-items:flex-start;
+      background:var(--white); border:1px solid var(--border);
+      border-radius:var(--r-md); padding:18px 20px;
+    }
+    .feature-num {
+      font-family:'Bricolage Grotesque',sans-serif; font-size:20px; font-weight:800;
+      color:var(--accent-mid); letter-spacing:-1px; flex-shrink:0; width:32px; line-height:1.2;
+    }
+    .feature-content {}
+    .feature-title { font-size:14px; font-weight:700; color:var(--text); margin-bottom:4px; }
+    .feature-desc { font-size:13px; color:var(--text-2); line-height:1.55; }
+
+    /* PERSONAS */
+    .persona-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:20px; }
+    .persona-card { background:var(--white); border:1px solid var(--border); border-radius:var(--r-xl); padding:28px; }
+    .persona-header { display:flex; align-items:center; gap:14px; margin-bottom:18px; }
+    .persona-avatar { width:56px; height:56px; border-radius:50%; overflow:hidden; flex-shrink:0; background:var(--surface); }
+    .persona-avatar img { width:100%; height:100%; object-fit:cover; }
+    .persona-name { font-family:'Bricolage Grotesque',sans-serif; font-size:18px; font-weight:700; letter-spacing:-.3px; }
+    .persona-role { font-size:12px; color:var(--text-3); margin-top:2px; }
+    .persona-label { font-size:10.5px; font-weight:700; letter-spacing:.8px; text-transform:uppercase; color:var(--text-3); margin-bottom:6px; }
+    .persona-quote { font-size:13.5px; color:var(--text-2); line-height:1.6; font-style:italic; margin-bottom:14px; }
+    .persona-desc { font-size:13.5px; color:var(--text-2); line-height:1.6; }
+
+    /* RESEARCH FINDINGS */
+    .findings { display:flex; flex-direction:column; gap:10px; margin-top:20px; }
+    .finding-item {
+      display:flex; gap:12px; align-items:flex-start;
+      padding:16px 18px; background:var(--white); border:1px solid var(--border); border-radius:var(--r-md);
+    }
+    .finding-icon { font-size:18px; flex-shrink:0; }
+    .finding-text {}
+    .finding-title { font-size:14px; font-weight:600; color:var(--text); margin-bottom:3px; }
+    .finding-desc { font-size:13px; color:var(--text-2); line-height:1.5; }
+
+    /* DESIGN SYSTEM */
+    .ds-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-top:20px; }
+    .ds-card { background:var(--white); border:1px solid var(--border); border-radius:var(--r-lg); padding:22px; }
+    .ds-letter { font-family:'Bricolage Grotesque',sans-serif; font-size:36px; font-weight:800; letter-spacing:-1.5px; color:var(--accent-mid); margin-bottom:8px; line-height:1; }
+    .ds-title { font-size:14px; font-weight:700; color:var(--text); margin-bottom:4px; }
+    .ds-desc { font-size:12.5px; color:var(--text-2); line-height:1.5; }
+
+    .color-row { display:flex; gap:8px; margin-top:16px; flex-wrap:wrap; }
+    .color-chip {
+      display:flex; align-items:center; gap:8px;
+      background:var(--white); border:1px solid var(--border); border-radius:var(--r-md);
+      padding:10px 14px; flex:1; min-width:160px;
+    }
+    .color-swatch { width:28px; height:28px; border-radius:6px; flex-shrink:0; }
+    .color-info {}
+    .color-name { font-size:12.5px; font-weight:600; color:var(--text); }
+    .color-hex { font-size:11px; color:var(--text-3); }
+
+    /* SCREEN DESIGNS */
+    .screens-grid { display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-top:20px; }
+    .screen-item { display:flex; flex-direction:column; gap:10px; }
+    .screen-label { font-size:13px; font-weight:600; color:var(--text-2); }
+    .screen-item img { width:100%; display:block; border-radius:var(--r-lg); }
+
+    /* INSIGHTS */
+    .insights { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-top:20px; }
+    .insight-card { background:var(--white); border:1px solid var(--border); border-radius:var(--r-lg); padding:22px; }
+    .insight-title { font-size:14px; font-weight:700; color:var(--text); margin-bottom:8px; }
+    .insight-desc { font-size:13px; color:var(--text-2); line-height:1.55; }
+
+    /* NEXT */
+    .next-project { border-top:1px solid var(--border); padding-top:48px; margin-top:48px; display:flex; justify-content:space-between; align-items:center; gap:24px; flex-wrap:wrap; }
+    .next-label { font-size:11px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:var(--text-3); margin-bottom:8px; }
+    .next-title { font-family:'Bricolage Grotesque',sans-serif; font-size:24px; font-weight:800; letter-spacing:-.5px; color:var(--text); }
+    .next-link { display:inline-flex; align-items:center; gap:8px; background:var(--text); color:#fff; padding:13px 24px; border-radius:var(--r-pill); font-size:14px; font-weight:500; text-decoration:none; transition:all .2s; white-space:nowrap; }
+    .next-link:hover { background:var(--accent); transform:translateY(-1px); }
+
+    footer { max-width:1160px; margin:0 auto; padding:28px 40px 36px; display:flex; justify-content:space-between; align-items:center; border-top:1px solid var(--border); font-size:12.5px; color:var(--text-3); }
+    footer a { color:var(--text-3); text-decoration:none; transition:color .18s; }
+    footer a:hover { color:var(--accent); }
+    .footer-links { display:flex; gap:22px; }
+
+    [data-fade] { opacity:0; transform:translateY(18px); transition:opacity .6s ease,transform .6s ease; }
+    [data-fade].in { opacity:1; transform:none; }
+    [data-fade][data-d="1"] { transition-delay:.08s; }
+    [data-fade][data-d="2"] { transition-delay:.16s; }
+
+    @media(max-width:768px) {
+      nav,footer,.cs-hero,.cs-cover,.cs-body { padding-left:20px; padding-right:20px; }
+      .cs-meta,.challenge-grid,.persona-grid,.ds-grid,.screens-grid,.insights { grid-template-columns:1fr; }
+      .screen-item.wide { grid-column:span 1; }
+    }
+
+    /* ─── CONTACT ─── */
+    .contact-block { max-width: 1160px; margin: 0 auto; padding: 0 40px 100px; }
+    .contact-inner-wrap {
+      display: flex; align-items: center; gap: 80px;
+      border: 1px solid var(--border); border-radius: 28px;
+      padding: 56px 64px;
+    }
+    .contact-heading {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: clamp(32px, 3.8vw, 52px); font-weight: 800;
+      letter-spacing: -1.5px; line-height: 1.1; color: var(--text);
+      flex: 1; min-width: 260px;
+    }
+    .contact-right { flex: 1; }
+    .contact-list { display: flex; flex-direction: column; }
+    .contact-row {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 18px 20px; border-radius: 10px;
+      text-decoration: none; color: inherit;
+      transition: background 0.18s;
+    }
+    .contact-row:hover { background: var(--surface); }
+    .contact-row-left { display: flex; align-items: center; gap: 14px; }
+    .contact-icon {
+      width: 32px; height: 32px; display: flex; align-items: center; justify-content: center;
+      color: var(--text-2);
+    }
+    .contact-label { font-size: 14px; font-weight: 500; color: var(--text); }
+    .contact-row-right { display: flex; align-items: center; gap: 8px; color: var(--text-3); font-size: 13px; }
+    .contact-row-right svg { color: var(--text-3); }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+  <a href="index.html" class="nav-back">
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M10 3L5 8l5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    All work
+  </a>
+  <a href="index.html" class="nav-logo">Anisha<em>.</em></a>
+  </div>
+</nav>
+
+<div class="cs-hero">
+  <div class="cs-tag">AI Product · Mobile &amp; Desktop · Design Systems</div>
+  <h1 data-fade>Style IO —<br>AI Personal Stylist</h1>
+  <p class="cs-hero-sub" data-fade data-d="1">
+    Designing an end-to-end AI-powered styling experience that makes professional fashion advice accessible, affordable, and personalized for everyone — across mobile and desktop.
+  </p>
+  <div class="cs-meta" data-fade data-d="2">
+    <div class="cs-meta-item">
+      <div class="cs-meta-label">My Role</div>
+      <div class="cs-meta-value">UX / UI Designer</div>
+    </div>
+    <div class="cs-meta-item">
+      <div class="cs-meta-label">Timeline</div>
+      <div class="cs-meta-value">8 weeks</div>
+    </div>
+    <div class="cs-meta-item">
+      <div class="cs-meta-label">Platform</div>
+      <div class="cs-meta-value">Mobile &amp; Desktop</div>
+    </div>
+    <div class="cs-meta-item">
+      <div class="cs-meta-label">Focus</div>
+      <div class="cs-meta-value">AI UX · Design Systems</div>
+    </div>
+  </div>
+</div>
+
+<div class="cs-cover">
+  <img src="styleio-hero-image.png" alt="Style IO wardrobe dashboard — desktop view" />
+</div>
+
+<div class="cs-body">
+
+  <!-- CHALLENGE -->
+  <div class="cs-section" data-fade>
+    <span class="eyebrow">The Challenge</span>
+    <h2 class="cs-h2">Personal styling is broken for most people</h2>
+    <p class="cs-p">Professional personal styling is expensive, time-consuming, and out of reach for most everyday users. Meanwhile, existing wardrobe apps fail to learn and adapt — leaving users with generic suggestions that don't reflect their actual wardrobe, schedule, or taste.</p>
+    <div class="challenge-grid">
+      <div class="challenge-card">
+        <div class="challenge-icon">🧩</div>
+        <div class="challenge-title">Lack of Styling Knowledge</div>
+        <div class="challenge-desc">Users don't know how to style their existing pieces together for specific occasions and seasons.</div>
+      </div>
+      <div class="challenge-card">
+        <div class="challenge-icon">⏱️</div>
+        <div class="challenge-title">Time Constraints</div>
+        <div class="challenge-desc">High-profile professionals lack the time to shop or curate their wardrobe thoughtfully.</div>
+      </div>
+      <div class="challenge-card">
+        <div class="challenge-icon">🔄</div>
+        <div class="challenge-title">Service Limitations</div>
+        <div class="challenge-desc">Existing subscription services fail to adapt to specific user tastes over time.</div>
+      </div>
+      <div class="challenge-card">
+        <div class="challenge-icon">💸</div>
+        <div class="challenge-title">Accessibility Gap</div>
+        <div class="challenge-desc">Personal styling is expensive and inaccessible to everyday users without a large budget.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SOLUTION -->
+  <div class="cs-section" data-fade>
+    <span class="eyebrow">The Solution</span>
+    <h2 class="cs-h2">An AI stylist that learns you</h2>
+    <p class="cs-p">StyleIO is an integrated mobile and desktop application that leverages generative AI to act as a personal stylist — making professional styling accessible, adaptive, and convenient for everyone.</p>
+    <div class="features-list">
+      <div class="feature-item">
+        <div class="feature-num">01</div>
+        <div class="feature-content">
+          <div class="feature-title">Wardrobe Integration</div>
+          <div class="feature-desc">Upload inspiration photos from Pinterest or your camera roll to receive recommendations based on your existing wardrobe — not what you need to buy.</div>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-num">02</div>
+        <div class="feature-content">
+          <div class="feature-title">Personalized Recommendations</div>
+          <div class="feature-desc">AI suggests outfits tailored to occasions, seasons, and your unique style goals — with a feedback loop that gets smarter over time.</div>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-num">03</div>
+        <div class="feature-content">
+          <div class="feature-title">Integrated Shopping</div>
+          <div class="feature-desc">Missing a key piece? The app surfaces new items from nearby stores that complement what you already own.</div>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-num">04</div>
+        <div class="feature-content">
+          <div class="feature-title">Smart Scheduling</div>
+          <div class="feature-desc">A calendar feature proactively suggests outfits for upcoming events — networking sessions, interviews, casual weekends.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- USER RESEARCH -->
+  <div class="cs-section" data-fade>
+    <span class="eyebrow">User Research</span>
+    <h2 class="cs-h2">Designing for two very different style needs</h2>
+    <p class="cs-p">User research began with defining distinct personas to understand the range of users Style IO needed to serve — from the style-curious young professional to the time-strapped executive.</p>
+    <div class="persona-grid">
+      <div class="persona-card">
+        <div class="persona-header">
+          <div class="persona-avatar">
+            <img src="https://framerusercontent.com/images/j0ky8cfHIRgUh8gpJDqQGgPU73w.jpg" alt="Sarah" />
+          </div>
+          <div>
+            <div class="persona-name">Sarah</div>
+            <div class="persona-role">25 · Young Professional</div>
+          </div>
+        </div>
+        <div class="persona-label">Motivation</div>
+        <p class="persona-quote">"Looking for joy in discovering her unique style."</p>
+        <div class="persona-label">Needs</div>
+        <p class="persona-desc">Wants to experiment and find her aesthetic without having to buy new things constantly. Needs clear outfit suggestions tied to her existing clothes and upcoming calendar events.</p>
+      </div>
+      <div class="persona-card">
+        <div class="persona-header">
+          <div class="persona-avatar">
+            <img src="https://framerusercontent.com/images/2t6VQV7Y5Dxw0WO9bPNLVmElacQ.jpg" alt="James" />
+          </div>
+          <div>
+            <div class="persona-name">James</div>
+            <div class="persona-role">40 · Architect</div>
+          </div>
+        </div>
+        <div class="persona-label">Motivation</div>
+        <p class="persona-quote">"Needs efficient, curated styling for frequent professional events."</p>
+        <div class="persona-label">Needs</div>
+        <p class="persona-desc">No time to think about what to wear. Wants a frictionless system that produces polished, context-appropriate outfits for client meetings, presentations, and industry events.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- KEY RESEARCH FINDINGS -->
+  <div class="cs-section" data-fade>
+    <span class="eyebrow">Usability Testing Findings</span>
+    <h2 class="cs-h2">Three problems the first design didn't solve</h2>
+    <p class="cs-p">Mid-fidelity prototypes were tested with participants before moving to high-fidelity. Three consistent issues surfaced across sessions and directly shaped the final design.</p>
+    <div class="findings">
+      <div class="finding-item">
+        <div class="finding-icon">🗺️</div>
+        <div class="finding-text">
+          <div class="finding-title">Navigation Issues</div>
+          <div class="finding-desc">Users found the mobile information architecture confusing, and icons were difficult to interpret compared to the more spacious desktop version.</div>
+        </div>
+      </div>
+      <div class="finding-item">
+        <div class="finding-icon">💬</div>
+        <div class="finding-text">
+          <div class="finding-title">Lack of Feedback</div>
+          <div class="finding-desc">The initial design lacked clear confirmation screens for actions like selecting items or completing purchases — leaving users unsure if their action registered.</div>
+        </div>
+      </div>
+      <div class="finding-item">
+        <div class="finding-icon">🔍</div>
+        <div class="finding-text">
+          <div class="finding-title">Missing Context</div>
+          <div class="finding-desc">Participants wanted more interactive screens where the AI gathers additional details upfront — occasion, weather, formality — to better tailor suggestions from the start.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DESIGN SYSTEM -->
+  <div class="cs-section" data-fade>
+    <span class="eyebrow">Design System</span>
+    <h2 class="cs-h2">Modern. Bold. Innovative.</h2>
+    <p class="cs-p">A comprehensive design system was built around three brand attributes to ensure visual consistency across all touchpoints — mobile and desktop, onboarding and daily use.</p>
+    <div class="ds-grid">
+      <div class="ds-card">
+        <div class="ds-letter">M</div>
+        <div class="ds-title">Modern</div>
+        <div class="ds-desc">Contemporary aesthetics with clean, uncluttered interfaces and plenty of breathing room.</div>
+      </div>
+      <div class="ds-card">
+        <div class="ds-letter">B</div>
+        <div class="ds-title">Bold</div>
+        <div class="ds-desc">Confident design choices and striking visuals that signal fashion authority.</div>
+      </div>
+      <div class="ds-card">
+        <div class="ds-letter">I</div>
+        <div class="ds-title">Innovative</div>
+        <div class="ds-desc">AI-powered features with a cutting-edge feel — surfaces intelligence without complexity.</div>
+      </div>
+    </div>
+    <div class="color-row">
+      <div class="color-chip">
+        <div class="color-swatch" style="background:#172743;"></div>
+        <div class="color-info"><div class="color-name">Oxford Blue</div><div class="color-hex">#172743 · Primary</div></div>
+      </div>
+      <div class="color-chip">
+        <div class="color-swatch" style="background:#EEDCCF; border:1px solid #e0d0c0;"></div>
+        <div class="color-info"><div class="color-name">Champagne Pink</div><div class="color-hex">#EEDCCF · Secondary</div></div>
+      </div>
+      <div class="color-chip">
+        <div class="color-swatch" style="background:#A0785A;"></div>
+        <div class="color-info"><div class="color-name">Tan</div><div class="color-hex">#A0785A · Accent</div></div>
+      </div>
+    </div>
+    <div class="callout" style="margin-top:24px;">
+      <p><strong>Typography — Urbanist.</strong> Selected for its clean geometry and versatility across weights. Bold (700) for headers, SemiBold (600) for subheadings, Medium (500) for body — creating clear hierarchy without decorative contrast.</p>
+    </div>
+  </div>
+
+  <!-- SCREENS -->
+  <div class="cs-section" data-fade>
+    <span class="eyebrow">Screen Designs</span>
+    <h2 class="cs-h2">High-fidelity screens — refined from testing</h2>
+    <p class="cs-p">Every screen went through at least one round of usability testing. Key refinements included clearer navigation labels, added confirmation states, and a richer style quiz onboarding flow.</p>
+    <div class="screens-grid">
+      <div class="screen-item">
+        <div class="screen-label">Wardrobe Dashboard — Desktop</div>
+        <img src="https://framerusercontent.com/images/IgOZ8qr1Spbsi1PLWluy77HHgM.png" alt="Wardrobe dashboard" loading="lazy" />
+      </div>
+      <div class="screen-item">
+        <div class="screen-label">Style Quiz — Mobile</div>
+        <img src="https://framerusercontent.com/images/HY2tn0NUroFyedOWtmi62HfujvI.png" alt="Style quiz" loading="lazy" />
+      </div>
+      <div class="screen-item">
+        <div class="screen-label">Calendar View — Mobile</div>
+        <img src="https://framerusercontent.com/images/71T5oSDP9m9qyOdX1k6RYZSzTCg.png" alt="Calendar view" loading="lazy" />
+      </div>
+      <div class="screen-item">
+        <div class="screen-label">AI Recommendations — Desktop</div>
+        <img src="https://framerusercontent.com/images/E6hVLZKnRjOpNZMvnBZa5sF7Xo.png" alt="AI recommendations" loading="lazy" />
+      </div>
+      <div class="screen-item">
+        <div class="screen-label">Shopping Integration — Desktop</div>
+        <img src="https://framerusercontent.com/images/g9y6fFEvqKutSoGauyZBTp8s.png" alt="Shopping integration" loading="lazy" />
+      </div>
+      <div class="screen-item">
+        <div class="screen-label">Favourites Dashboard — Desktop</div>
+        <img src="https://framerusercontent.com/images/wWUJNZdOf187obOJMYSS0NqSVI4.png" alt="Favourites" loading="lazy" />
+      </div>
+    </div>
+  </div>
+
+  <!-- KEY INTERACTIONS -->
+  <div class="cs-section" data-fade>
+    <span class="eyebrow">Key Interactions</span>
+    <h2 class="cs-h2">Where the AI gets smarter</h2>
+    <p class="cs-p">Three interaction patterns were critical to making the AI feel genuinely useful — not just decorative.</p>
+    <div class="features-list">
+      <div class="feature-item">
+        <div class="feature-num">👍</div>
+        <div class="feature-content">
+          <div class="feature-title">Like / Dislike Feedback</div>
+          <div class="feature-desc">Simple feedback mechanism on every suggestion. When users dislike an outfit, the AI asks a follow-up question — "Too casual? Wrong color?" — to refine future results with precision.</div>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-num">💬</div>
+        <div class="feature-content">
+          <div class="feature-title">Contextual AI Prompts</div>
+          <div class="feature-desc">Before generating suggestions, the AI asks targeted follow-up questions — occasion, weather, how formal — so recommendations land accurately on the first try.</div>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-num">🔎</div>
+        <div class="feature-content">
+          <div class="feature-title">Advanced Filters (Desktop)</div>
+          <div class="feature-desc">The desktop interface includes precise search filtering by size, category, and occasion — surfacing exactly the right items from the wardrobe and integrated shopping catalog.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONCLUSION -->
+  <div class="cs-section" data-fade>
+    <span class="eyebrow">Conclusion</span>
+    <h2 class="cs-h2">What this project taught me</h2>
+    <div class="insights">
+      <div class="insight-card">
+        <div class="insight-title">Consistency Across Platforms</div>
+        <div class="insight-desc">Building a unified design system upfront saved enormous time when translating mobile flows to desktop — and vice versa.</div>
+      </div>
+      <div class="insight-card">
+        <div class="insight-title">Testing Changes Everything</div>
+        <div class="insight-desc">Mid-fi usability testing transformed a confusing navigation into a streamlined experience — without any extra features.</div>
+      </div>
+      <div class="insight-card">
+        <div class="insight-title">AI Needs to Earn Trust</div>
+        <div class="insight-desc">The feedback loop (like/dislike + follow-up) was the most critical design decision — it transformed the AI from "generic" to genuinely personal.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- NEXT -->
+  <div class="next-project" data-fade>
+    <div>
+      <div class="next-label">Next case study</div>
+      <div class="next-title">Zippi — Autonomous Robot Delivery</div>
+    </div>
+    <a href="zippi.html" class="next-link">
+      View project
+      <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M2.5 7.5h10M7.5 2.5l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+  </div>
+
+</div>
+
+
+
+<!-- ═══ CONTACT ════════════════════════════════════ -->
+<div class="contact-block" id="contact">
+  <div class="contact-inner-wrap">
+    <h2 class="contact-heading" data-fade>Let's build something meaningful together.</h2>
+    <div class="contact-right">
+  <div class="contact-list" data-fade data-d="1">
+
+    <!-- Email -->
+    <a href="mailto:abhegade11@gmail.com" class="contact-row">
+      <div class="contact-row-left">
+        <div class="contact-icon">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><rect x="1.5" y="3.5" width="15" height="11" rx="2" stroke="currentColor" stroke-width="1.4"/><path d="M1.5 6l7.5 5 7.5-5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+        </div>
+        <span class="contact-label">Email</span>
+      </div>
+      <div class="contact-row-right">
+        abhegade11@gmail.com
+        <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M1.5 11.5l10-10M11.5 1.5H5.5M11.5 1.5v6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+    </a>
+
+    <!-- LinkedIn -->
+    <a href="https://www.linkedin.com/in/anisha-bhegade" target="_blank" rel="noopener" class="contact-row">
+      <div class="contact-row-left">
+        <div class="contact-icon">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><rect x="1.5" y="1.5" width="15" height="15" rx="3" stroke="currentColor" stroke-width="1.4"/><path d="M5 7.5V13M5 5v.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><path d="M8.5 13v-3a2 2 0 014 0v3M8.5 7.5V13" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <span class="contact-label">LinkedIn</span>
+      </div>
+      <div class="contact-row-right">
+        /in/anisha-bhegade
+        <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M1.5 11.5l10-10M11.5 1.5H5.5M11.5 1.5v6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+    </a>
+
+    <!-- Behance -->
+    <a href="https://www.behance.net/anishabhegade" target="_blank" rel="noopener" class="contact-row">
+      <div class="contact-row-left">
+        <div class="contact-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M2 7h7c2 0 3.5 1 3.5 3S10 13 8 13H2V7zm0 6h7.5c2.5 0 4 1.2 4 3.2S11.5 19 9 19H2v-6z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M14 10h8M16 7h4M14.5 15.5c0-2.5 2-4 4-4 2.2 0 4 1.5 4 4H14.5zm0 0c0 2 1.5 3.5 4 3.5 1.5 0 2.5-.5 3-1.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <span class="contact-label">Behance</span>
+      </div>
+      <div class="contact-row-right">
+        /anishabhegade
+        <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M1.5 11.5l10-10M11.5 1.5H5.5M11.5 1.5v6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+    </a>
+
+    </div>
+    </div><!-- .contact-right -->
+  </div><!-- .contact-inner-wrap -->
+</div>
+
+<script>
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('in'); obs.unobserve(e.target); } });
+  }, { threshold:0.1, rootMargin:'0px 0px -32px 0px' });
+  document.querySelectorAll('[data-fade]').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
