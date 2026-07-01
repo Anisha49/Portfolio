@@ -6,7 +6,7 @@
   <title>About — Anisha Bhegade</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=Caveat:wght@500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
     :root {
@@ -46,6 +46,107 @@
     .page-hero h1 { font-family:'Bricolage Grotesque',sans-serif; font-size:clamp(36px,5vw,64px); font-weight:800; letter-spacing:-2.5px; line-height:1.05; margin-bottom:20px; }
     .page-hero-sub { font-size:16.5px; color:var(--text-2); line-height:1.75; max-width:580px; }
     .page-hero-photo { width:380px; height:507px; border-radius:var(--r-xl); object-fit:cover; object-position:top center; border:1px solid var(--border); flex-shrink:0; display:block; }
+
+    /* ─── POLAROID STACK ─── */
+    .polaroid-wrap {
+      position: relative;
+      width: 400px;
+      height: 480px;
+      flex-shrink: 0;
+      align-self: center;
+    }
+    .polaroid {
+      position: absolute;
+      background: #fff;
+      padding: 10px 10px 38px;
+      box-shadow: 0 6px 28px rgba(0,0,0,0.18), 0 2px 8px rgba(0,0,0,0.09);
+      cursor: default;
+      transition: transform 0.45s cubic-bezier(.34,1.4,.64,1), box-shadow 0.3s ease;
+    }
+    .pol-photo {
+      width: 188px;
+      height: 230px;
+      overflow: hidden;
+    }
+    .pol-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+      display: block;
+      filter: grayscale(30%);
+      transition: filter 0.4s ease;
+    }
+    .polaroid-wrap:hover .pol-photo img { filter: grayscale(0%); }
+    .tape {
+      position: absolute;
+      top: -15px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 48px;
+      height: 26px;
+      background: rgba(18,18,18,0.72);
+      border-radius: 2px;
+      z-index: 20;
+    }
+    .pol-caption {
+      margin-top: 9px;
+      font-family: 'Caveat', cursive;
+      font-size: 14px;
+      font-weight: 500;
+      color: #6161A2;
+      text-align: center;
+      line-height: 1.3;
+    }
+    /* Polaroid 1 — behind, tilted left */
+    .p1 {
+      top: 90px;
+      left: 16px;
+      z-index: 1;
+      transform: rotate(-7deg);
+      animation: bobP1 4.2s ease-in-out infinite;
+    }
+    /* Polaroid 2 — front, tilted right */
+    .p2 {
+      top: 60px;
+      left: 185px;
+      z-index: 2;
+      transform: rotate(5deg);
+      animation: bobP2 5s ease-in-out infinite;
+      animation-delay: 0.7s;
+    }
+    .polaroid-wrap:hover .p1 {
+      animation: none;
+      transform: rotate(-13deg) translate(-20px, 14px);
+      box-shadow: 0 14px 44px rgba(0,0,0,0.2);
+    }
+    .polaroid-wrap:hover .p2 {
+      animation: none;
+      transform: rotate(11deg) translate(14px, -14px);
+      box-shadow: 0 14px 44px rgba(0,0,0,0.2);
+    }
+    @keyframes bobP1 {
+      0%, 100% { transform: rotate(-7deg) translateY(0); }
+      50%       { transform: rotate(-6.5deg) translateY(-7px); }
+    }
+    @keyframes bobP2 {
+      0%, 100% { transform: rotate(5deg) translateY(0); }
+      50%       { transform: rotate(5.5deg) translateY(-9px); }
+    }
+    .pol-quote {
+      position: absolute;
+      bottom: 12px;
+      left: 180px;
+      right: 0;
+      font-family: 'Caveat', cursive;
+      font-size: 17px;
+      font-weight: 600;
+      color: #6161A2;
+      line-height: 1.5;
+      transform: rotate(2deg);
+      z-index: 5;
+      padding-left: 8px;
+    }
     .hero-links { display:flex; gap:10px; flex-wrap:wrap; margin-top:28px; }
     .btn { display:inline-flex; align-items:center; gap:7px; padding:11px 22px; border-radius:var(--r-pill); font-size:13.5px; font-weight:500; text-decoration:none; transition:all .2s; white-space:nowrap; }
     .btn-dark { background:var(--text); color:#fff; }
@@ -57,7 +158,29 @@
     /* TOOLKIT */
     .toolkit-wrap { margin-top:32px; }
     .toolkit-label { font-size:12.5px; color:var(--text-3); font-weight:500; margin-bottom:12px; }
-    .toolkit-icons { display:inline-flex; gap:8px; align-items:center; background:rgba(255,255,255,0.55); backdrop-filter:blur(20px) saturate(180%); -webkit-backdrop-filter:blur(20px) saturate(180%); border-radius:16px; padding:10px 14px; border:1px solid rgba(255,255,255,0.7); box-shadow:0 4px 24px rgba(0,0,0,0.08), inset 0 1px 0 rgba(255,255,255,0.9); }
+    .toolkit-carousel {
+      overflow: hidden;
+      background: rgba(255,255,255,0.55);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      border-radius: 16px;
+      padding: 10px 0;
+      border: 1px solid rgba(255,255,255,0.7);
+      box-shadow: 0 4px 24px rgba(0,0,0,0.08), inset 0 1px 0 rgba(255,255,255,0.9);
+      max-width: 320px;
+    }
+    .toolkit-track {
+      display: flex;
+      gap: 10px;
+      width: max-content;
+      padding: 0 10px;
+      animation: toolkitScroll 8s linear infinite;
+    }
+    .toolkit-carousel:hover .toolkit-track { animation-play-state: paused; }
+    @keyframes toolkitScroll {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
     .toolkit-icon { width:42px; height:42px; border-radius:12px; overflow:hidden; flex-shrink:0; box-shadow:0 2px 8px rgba(0,0,0,0.1); transition:transform .2s ease, box-shadow .2s ease; cursor:default; }
     .toolkit-icon:hover { transform:translateY(-4px) scale(1.08); box-shadow:0 8px 20px rgba(0,0,0,0.15); }
     .toolkit-icon img { width:100%; height:100%; object-fit:cover; }
@@ -117,6 +240,10 @@
 
     /* PHOTO GRID */
     .photo-grid-wrap { max-width:1160px; margin:0 auto; padding:0 40px 100px; }
+    .photo-grid-header { margin-bottom:28px; text-align:center; }
+    .photo-grid-title { font-family:'Bricolage Grotesque',sans-serif; font-size:clamp(22px,3vw,36px); font-weight:800; letter-spacing:-1px; color:var(--text); display:flex; align-items:center; justify-content:center; gap:12px; margin-bottom:8px; }
+    .photo-grid-sticker { width:94px; height:94px; object-fit:contain; display:inline-block; vertical-align:middle; }
+    .photo-grid-sub { font-size:14px; color:var(--text-3); line-height:1.6; }
     .photo-grid {
       display:grid;
       grid-template-columns: repeat(3, 1fr);
@@ -126,11 +253,16 @@
     .photo-grid img {
       width:100%; height:100%;
       object-fit:cover; border-radius:14px;
-      display:block; transition:transform 0.4s ease, box-shadow 0.4s ease;
+      display:block;
+      opacity:0;
+      transition:opacity 0.65s ease, transform 0.65s cubic-bezier(.22,1,.36,1), box-shadow 0.4s ease;
     }
-    .photo-grid img:hover { transform:scale(1.02); box-shadow:0 12px 36px rgba(0,0,0,0.14); }
+    .photo-grid img.from-left  { transform:translateX(-48px); }
+    .photo-grid img.from-right { transform:translateX(48px); }
+    .photo-grid img.slide-in   { opacity:1; transform:translateX(0); }
+    .photo-grid img:hover { transform:scale(1.02) !important; box-shadow:0 12px 36px rgba(0,0,0,0.14); }
     /* Explicit grid placement */
-    .photo-grid img:nth-child(1) { grid-area: 1 / 1 / 4 / 2; } /* forest — left top */
+    .photo-grid img:nth-child(1) { grid-area: 1 / 1 / 4 / 2; object-position: center 30%; } /* chicago — left top */
     .photo-grid img:nth-child(2) { grid-area: 1 / 2 / 3 / 3; } /* croissants — mid top */
     .photo-grid img:nth-child(3) { grid-area: 1 / 3 / 3 / 4; } /* tulips — right top */
     .photo-grid img:nth-child(4) { grid-area: 4 / 1 / 7 / 2; object-position: center center; } /* skyline — left bottom */
@@ -178,6 +310,11 @@
       footer { padding-left:24px; padding-right:24px; }
       .page-hero { grid-template-columns:1fr; }
       .page-hero-photo { width:120px; height:120px; }
+      .polaroid-wrap { width:320px; height:380px; margin:0 auto; }
+      .pol-photo { width:146px; height:178px; }
+      .p1 { top:70px; left:10px; }
+      .p2 { top:46px; left:148px; }
+      .pol-quote { left:145px; font-size:15px; bottom:8px; }
       .page-body { grid-template-columns:1fr; }
       .exp-section { grid-template-columns:1fr; gap:20px; }
       .contact-inner-wrap { flex-direction:column; gap:32px; padding:32px 24px; }
@@ -188,6 +325,11 @@
       .page-hero,.page-body,.contact-block { padding-left:16px; padding-right:16px; }
       footer { padding-left:16px; padding-right:16px; flex-direction:column; gap:12px; text-align:center; }
       .nav-right .hide-sm { display:none; }
+      .polaroid-wrap { width:280px; height:340px; }
+      .pol-photo { width:124px; height:152px; }
+      .p1 { top:60px; left:6px; }
+      .p2 { top:38px; left:128px; }
+      .pol-quote { left:124px; font-size:13px; }
     }
 
     /* ─── CONTACT ─── */
@@ -273,7 +415,7 @@
 <div class="page-hero">
   <div class="page-hero-text" data-fade>
     <h1>The designer<br>behind the work<em style="color:var(--accent)">.</em></h1>
-    <p class="page-hero-sub">I'm Anisha, a UX Designer. My job? turn complexity into simplicity !!<br><br>My journey didn't start in a design studio, it started in the world of logic and code during my Computer Science degree. While I loved the "how" of technology, I became obsessed with the "why", leading me to pivot from writing code to architecting the human experiences behind it.<br><br>When something I've designed makes a person's day a little easier, that's the win. That's what keeps me at it.</p>
+    <p class="page-hero-sub">I'm Anisha, a UX Designer. My job? turn complexity into simplicity !!<br><br>My journey didn't start in a design studio, it started in the world of logic and code during my Computer Science degree. While I loved the "how" of technology, I got curious about the "why", leading me to pivot from writing code to designing the human experiences behind it.<br><br>When something I've designed makes a person's day a little easier, that's the win. That's what keeps me at it.</p>
     <div class="hero-links">
       <a href="anisha.pdf" target="_blank" class="btn btn-outline-fill">Resume ↗</a>
       <a href="https://www.linkedin.com/in/anisha-bhegade" target="_blank" class="btn btn-outline-fill">LinkedIn ↗</a>
@@ -281,17 +423,44 @@
     </div>
     <div class="toolkit-wrap">
       <p class="toolkit-label">Current toolkit</p>
-      <div class="toolkit-icons">
-        <div class="toolkit-icon"><img src="figma.png" alt="Figma" /></div>
-        <div class="toolkit-icon"><img src="framer.png" alt="Framer" /></div>
-        <div class="toolkit-icon"><img src="notion.png" alt="Notion" /></div>
-        <div class="toolkit-icon"><img src="jira.png" alt="Jira" /></div>
-        <div class="toolkit-icon"><img src="miro.png" alt="Miro" /></div>
-        <div class="toolkit-icon"><img src="photoshop.png" alt="Photoshop" /></div>
+      <div class="toolkit-carousel">
+        <div class="toolkit-track">
+          <!-- original set -->
+          <div class="toolkit-icon"><img src="figma.png" alt="Figma" /></div>
+          <div class="toolkit-icon"><img src="framer.png" alt="Framer" /></div>
+          <div class="toolkit-icon"><img src="notion.png" alt="Notion" /></div>
+          <div class="toolkit-icon"><img src="jira.png" alt="Jira" /></div>
+          <div class="toolkit-icon"><img src="miro.png" alt="Miro" /></div>
+          <div class="toolkit-icon"><img src="photoshop.png" alt="Photoshop" /></div>
+          <!-- duplicate for seamless loop -->
+          <div class="toolkit-icon"><img src="figma.png" alt="Figma" /></div>
+          <div class="toolkit-icon"><img src="framer.png" alt="Framer" /></div>
+          <div class="toolkit-icon"><img src="notion.png" alt="Notion" /></div>
+          <div class="toolkit-icon"><img src="jira.png" alt="Jira" /></div>
+          <div class="toolkit-icon"><img src="miro.png" alt="Miro" /></div>
+          <div class="toolkit-icon"><img src="photoshop.png" alt="Photoshop" /></div>
+        </div>
       </div>
     </div>
   </div>
-  <img src="https://framerusercontent.com/images/tVJLNGtPO3dV05oqj7gt2tZz8.jpeg" alt="Anisha Bhegade" class="page-hero-photo" data-fade data-d="1" />
+  <div class="polaroid-wrap" data-fade data-d="1">
+    <!-- Photo 1 — behind, tilted left -->
+    <div class="polaroid p1">
+      <div class="tape"></div>
+      <div class="pol-photo">
+        <img src="graduation.jpg" alt="Graduation day" style="object-position:center center;" />
+      </div>
+      <div class="pol-caption">Graduation day!</div>
+    </div>
+    <!-- Photo 2 — front, tilted right -->
+    <div class="polaroid p2">
+      <div class="tape"></div>
+      <div class="pol-photo">
+        <img src="me.jpg" alt="Hey it's me" style="object-position:top center;" />
+      </div>
+      <div class="pol-caption">Hey, it's me!</div>
+    </div>
+  </div>
 </div>
 
 <!-- EXPERIENCE — full width -->
@@ -345,7 +514,7 @@
           <div class="edu-card-meta">2023 – Nov 2025</div>
         </div>
         <div class="edu-card">
-          <div class="edu-card-degree">Bachelor of Engineering — Computer Science</div>
+          <div class="edu-card-degree">Bachelor of Science — Computer Science</div>
           <div class="edu-card-school">Savitribai Phule Pune University · Pune, India</div>
           <div class="edu-card-meta">2018 – Aug 2022</div>
         </div>
@@ -365,6 +534,10 @@
 
 <!-- PHOTO GRID -->
 <div class="photo-grid-wrap">
+  <div class="photo-grid-header" data-fade>
+    <h2 class="photo-grid-title">my life beyond screen <img src="sticker.png" alt="" class="photo-grid-sticker" /></h2>
+    <p class="photo-grid-sub">This is my collection of quiet joys - the simple moments that make me feel most like myself !!</p>
+  </div>
   <div class="photo-grid" data-fade>
     <img src="photo1.jpg" alt="forest" />
     <img src="photo2.jpg" alt="croissants" />
@@ -441,7 +614,7 @@
         <img src="codex-stamp.png" alt="Codex" style="height:110px; width:auto; mix-blend-mode:multiply;" />
       </div>
       <p class="made-caption">I designed and built this website with two close collaborators</p>
-      <p class="made-heading">Figma and Codex in ~16h</p>
+      <p class="made-heading">Figma and Codex in ~24h</p>
     </div>
     <div class="made-with-right">
       <p class="made-tagline-sm">Fueled by coffee & curiosity</p>
@@ -455,6 +628,23 @@
     entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('in'); obs.unobserve(e.target); } });
   }, { threshold:0.08, rootMargin:'0px 0px -24px 0px' });
   document.querySelectorAll('[data-fade]').forEach(el => obs.observe(el));
+
+  // Photo grid slide-in from left & right alternating
+  const gridObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const imgs = e.target.querySelectorAll('img');
+        imgs.forEach((img, i) => {
+          img.classList.add(i % 2 === 0 ? 'from-left' : 'from-right');
+          setTimeout(() => img.classList.add('slide-in'), 80 + i * 120);
+        });
+        gridObs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.05 });
+  const grid = document.querySelector('.photo-grid');
+  if (grid) gridObs.observe(grid);
 </script>
+
 </body>
 </html>

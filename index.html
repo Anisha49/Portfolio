@@ -291,7 +291,7 @@
       background: transparent; border: 1px solid var(--border); border-radius: var(--r-xl);
       padding: 36px 36px 40px; transition: background 0.6s ease-in-out, border-color 0.6s ease-in-out, transform 0.6s ease-in-out, box-shadow 0.6s ease-in-out;
     }
-    .approach-grid .approach-card:hover { background: var(--card-hover, #E1E0F3); border-color: transparent; transform: translateY(-10px) !important; box-shadow: 0 24px 48px rgba(0,0,0,0.12); }
+    .approach-grid .approach-card:hover { background: var(--card-hover, #E1E0F3); border: 2px solid var(--card-border, #9B98D4); transform: translateY(-10px) !important; box-shadow: 0 24px 48px rgba(0,0,0,0.12); }
     .approach-meta {
       font-size: 11.5px; font-weight: 600; letter-spacing: 0.3px;
       color: var(--text-3); margin-bottom: 10px;
@@ -678,7 +678,7 @@
       <p class="eyebrow">Selected work</p>
       <h2 class="section-title">Research-driven.<br>System-aware. Shipped.</h2>
     </div>
-    <p class="work-note">Four case studies spanning enterprise finance, AI products, information architecture, and social good.</p>
+    <p class="work-note">Four case studies spanning enterprise finance, AI products, information architecture, and research.</p>
   </div>
 
   <div class="projects-grid">
@@ -703,7 +703,7 @@
       <!-- 2 — Student Housing (701px) -->
       <a href="student-housing.html" class="pcard" data-fade data-d="1" style="--card-hover-bg: #EAEFF3; --card-meta-hover: #2E5A7A;">
         <div class="pcard-top">
-          <div class="pcard-meta">UX Research · Social Good</div>
+          <div class="pcard-meta">UX Research · Usability Testing</div>
           <div class="pcard-arrow">
             <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M2.5 12.5l10-10M12.5 2.5H6.5M12.5 2.5v6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </div>
@@ -736,7 +736,7 @@
       <!-- 4 — Craigslist (580px) -->
       <a href="craigslist.html" class="pcard" data-fade data-d="3" style="--card-hover-bg: #EBF1EA; --card-meta-hover: #2E6B38;">
         <div class="pcard-top">
-          <div class="pcard-meta">Information Architecture · UX Research</div>
+          <div class="pcard-meta">Information Architecture · Website Design</div>
           <div class="pcard-arrow">
             <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M2.5 12.5l10-10M12.5 2.5H6.5M12.5 2.5v6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </div>
@@ -757,22 +757,22 @@
   <div class="approach-inner">
     <h2 class="approach-heading" data-fade>My approach</h2>
     <div class="approach-grid">
-      <div class="approach-card" data-fade data-d="1" style="--card-hover: #FFFCEC;">
+      <div class="approach-card" data-fade data-d="1" style="--card-hover: #FFFCEC; --card-border: #C9B84A;">
         <div class="approach-meta">01 — UNDERSTAND</div>
         <div class="approach-title">Start with people</div>
         <p class="approach-desc">I spend more time understanding the problem than designing the solution. Surveys, interviews, competitive analysis — all before Figma opens.</p>
       </div>
-      <div class="approach-card" data-fade data-d="2" style="--card-hover: #F0F4F9;">
+      <div class="approach-card" data-fade data-d="2" style="--card-hover: #F0F4F9; --card-border: #8AAAC8;">
         <div class="approach-meta">03 — DESIGN</div>
         <div class="approach-title">Prove it, then build it</div>
         <p class="approach-desc">Every design decision I make has a reason behind it. I test, iterate, and refine until the solution earns its place.</p>
       </div>
-      <div class="approach-card" data-fade data-d="3" style="--card-hover: #FBFFF5;">
+      <div class="approach-card" data-fade data-d="3" style="--card-hover: #FBFFF5; --card-border: #85B86A;">
         <div class="approach-meta">02 — QUESTION</div>
         <div class="approach-title">Find the real problem</div>
         <p class="approach-desc">Good design starts with the right problem. I ask uncomfortable questions early so we're not solving the wrong thing beautifully.</p>
       </div>
-      <div class="approach-card" data-fade data-d="4" style="--card-hover: #E1E0F3;">
+      <div class="approach-card" data-fade data-d="4" style="--card-hover: #E1E0F3; --card-border: #9B98D4;">
         <div class="approach-meta">04 — DELIVER</div>
         <div class="approach-title">Design that ships</div>
         <p class="approach-desc">I work within constraints — brand systems, stakeholders, live products. I make meaningful changes without blowing up what exists.</p>
@@ -848,7 +848,7 @@
 
       </div>
       <p class="made-caption">I designed and built this website with two close collaborators</p>
-      <p class="made-heading">Figma and Codex in ~16h</p>
+      <p class="made-heading">Figma and Codex in ~24h</p>
     </div>
     <div class="made-with-right">
       <p class="made-tagline-sm">Fueled by coffee & curiosity</p>
@@ -909,5 +909,6 @@
   }
   type();
 </script>
+
 </body>
 </html>
